@@ -1,0 +1,53 @@
+<%- include('../partials/header.ejs')%>
+    <h2> Manage your offers </h2>
+    <%if(buyerFlag){%>
+        <form>
+            <table class="new">
+            <tr>
+                <th>Incoming item</th>
+                <th>Outgoing item</th>
+                <th>Accept/Reject Offer</th>
+            </tr>
+            <tr>
+                <td>
+                    <%=item2.comicName%><br/>
+                    <img src = "<%= encodeURI(item2.comicImageURL)%>" alt = "<%= item2.comicName%>" width = "150" height = "200"/>
+                </td>
+                <td>
+                    <%=item1.comicName%><br/>
+                    <img src = "<%= encodeURI(item1.comicImageURL)%>" alt = "<%= item1.comicName%>" width = "150" height = "200"/>
+                </td>
+                <td>
+                    <button class = "acceptButton"  type = "submit" formmethod="POST" formaction="/users/<%=item1._id%>/<%=item2._id%>/accept?_method=PUT">Accept</button>
+                    <button class = "rejectButton"  type = "submit" formmethod="POST" formaction="/users/<%=item1._id%>/<%=item2._id%>/reject?_method=PUT">Reject</button>
+                </td>
+            </tr>
+            </table>
+        </form>
+    <%} if(sellerFlag){%>
+        <form>
+            <table class="new">
+            <tr>
+                <th>Incoming Trade</th>
+                <th>Outgoing Trade</th>
+                <th>Cancel Offer</th>
+            </tr>
+            <tr>
+                <td>
+                    <%=item1.comicName%><br/>
+                    <img src = "<%= encodeURI(item1.comicImageURL)%>" alt = "<%= item1.comicName%>" width = "150" height = "200"/>
+                </td>
+                <td>
+                    <%=item2.comicName%><br/>
+                    <img src = "<%= encodeURI(item2.comicImageURL)%>" alt = "<%= item2.comicName%>" width = "150" height = "200"/>
+                </td>
+                <td>
+                    <button class = "cancelButton"  type = "submit" formmethod="POST" formaction="/users/cancel/<%=item1._id%>?_method=PUT">Cancel</button>
+                </td>
+            </tr>
+            </table>
+        </form>
+        
+    <%}%>
+
+<%- include('../partials/footer.ejs')%>

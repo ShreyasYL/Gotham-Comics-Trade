@@ -1,0 +1,80 @@
+
+<%- include('../partials/header.ejs')%>
+<div class = "profileText">
+    <h4>Welcome, <%=user.firstName + " " + user.lastName%></h4>
+    <% if(trades.length > 0){%>
+            <p class = "profileText">You have posted the following trades</p>
+            <table class = "new">
+                <tr>
+                    <th>Publication Company</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Edit/Delete/Manage Offer</th>
+                </tr>
+            
+            <%trades.forEach(trade => {%>
+                <tr>
+                <td><%=trade.publicationCompany%></td>
+                <td><a class = "list" href = '/trades/<%=trade.id%>'><%=trade.comicName%></a></td>
+                <td><%=trade.offerStatus%></td>
+                <td> <%if(!trade.offerStatus.includes('Traded','Offer Pending')){%>
+                        <form class="form"><button class = "editButton"  type = "submit" formmethod="GET" formaction="/trades/<%=trade.id%>/editTrade">EDIT</button></form>
+                        
+                     <%}%>
+                     <%if(!trade.offerStatus.includes('Traded','Offer Pending')){%>
+                        <form><button  class = "deleteButton" type = "submit" formmethod="POST" formaction="/trades/<%=trade.id%>?_method=DELETE">DELETE</button></form>
+                     <%}%>
+                    <% if(trade.offerStatus === 'Offer Pending'){%>
+                        <form class="form"><button class = "manageOfferButton"  type = "submit" formmethod="GET" formaction="/users/<%=trade.id%>/manageOffer">Manage Offer</button></form> 
+                    <%}%>
+                 </td>
+            <%});
+        } else {%>  
+            </table>
+            <p class = "profileText">You have not created any trades</p>
+        <%}%>
+    
+    <% if(watchList.length > 0){%>
+        
+        <table class = "new">
+            <h4>Your watchlist</h4>
+            <tr>
+                <th>Publication Company</th>
+                <th>Comic Name</th>
+                <th></th>
+            </tr>
+            <%watchList.forEach(trade => {%>
+                <tr>
+                    <td><%=trade.publicationCompany%></td>
+                    <td><a class = "list" href = '/trades/<%=trade.id%>'><%=trade.comicName%></a></td>
+                    <td><form class="form"><button class = "unwatch"  type = "submit" formmethod="POST" formaction="/trades/<%=trade.id%>/unwatch/?_method=PUT">Unwatch</button></form></td>
+                </tr>
+            <%});
+            } else {%>  
+                </table>
+                <p class = "profileText">You do not have any items on your watch list.</p>
+            <%}%>
+    <% if(userOffers.length > 0){%>
+        
+        <table class = "new">
+            <h4>Your offers</h4>
+            <tr>
+                <th>Publication Company</th>
+                <th>Comic Name</th>
+                <th></th>
+            </tr>
+            <%userOffers.forEach(item => {%>
+                <tr>
+                    <td><%=item.publicationCompany%></td>
+                    <td><a class = "list" href = '/trades/<%=item.id%>'><%=item.comicName%></a></td>
+                    <td><form class="form"><button class = "cancel"  type = "submit" formmethod="POST" formaction="/users/cancel/<%=item.id%>?_method=PUT">Cancel</button></form></td>
+                </tr>
+
+            <%});%>
+        </table>
+            <%} else {%>
+                <p class = 'profileText'>You currently have no offers</p>
+            <%}%>
+        
+    </div>
+    <%- include('../partials/footer.ejs')%>

@@ -1,0 +1,24 @@
+<%- include('../partials/header.ejs')%>
+<div class = "content">
+    <form method = "POST" action ='/trades/<%= comic._id%>?_method=PUT'>
+        <table>
+            <tr>
+                <td><label for="publicationCompany" >Publication Company</label></td>
+                <td><input type="text" id="publicationCompany" name="publicationCompany" value = "<%= comic.publicationCompany%>" class = "fixed-width"></td>
+            </tr>
+            <tr>
+                <td><label for="comicName" >Comic Name</label></td>
+                <td><input type="text" id="comicName" name="comicName" value = "<%= comic.comicName%>" class = "fixed-width" required minlength="5"></td>
+            </tr>
+            <tr>
+                <td class = "align-top"><label for="storyPlot">Plot</label></td>
+                <td><textarea rows="5" id="storyPlot" name="storyPlot" class = "fixed-width" required minlength="10"><%= comic.storyPlot%></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" class = "align-right"><button>Submit</button></td>
+            </tr>
+        </table>        
+    </form>
+
+    </div>
+<%- include('../partials/footer.ejs')%>

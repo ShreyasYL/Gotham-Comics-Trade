@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+    <link rel = "stylesheet" href = "/css/indStyle.css">
+    
+        <title>Gotham Comic Book Trade - One stop online destination for trading DC and Marvel comics</title>
+    
+    <body>
+        <header> 
+            <div class = "pageHeader">
+                <nav>
+                <div id = "TradeStart">
+                    <span id = "newTrade">
+                        <a href = "/trades/newTrade">Trade Comics</a>
+                    </span>
+                    <%if(!user){%>
+                        <span id = "loginPage">
+                            <a href = "/users/login">Login</a>
+                        </span>
+                        <span id = "signUp">
+                            <a href = "/users/new">Sign Up</a>
+                        </span> 
+                    <%} else {%>
+                        <span id = "profile">
+                            <a href = "/users/profile">Profile</a>
+                        </span>  
+                        <span id = "logout">
+                            <a href = "/users/logout">Log Out</a>
+                        </span>
+                    <%}%>
+                </div>
+                </nav>
+                <div id = "logoAndSignIn">
+                    <a href = "/">
+                        <img src = "/images/GCT-Logo2.jpg" alt="Company Logo" height= "100" width= "200" />
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div id = "tradeListings">
+            <nav>
+                <a href = "/trades">Our Finest Trades</a>
+            </nav>
+        </div>
+        <% if(errorMessages.length > 0) {%>
+            <% errorMessages.forEach(message=>{%>
+                <div class='error'>
+                    <%=message%>
+                </div>
+                <%});%>
+                    <%}%>
+        
+                        <% if(successMessages.length > 0) {%>
+        
+                            <% successMessages.forEach(message=>{%>
+                                <div class='success'>
+                                    <%=message%>
+                                </div>
+                                <%});%>
+                                    <%}%>

@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs')%>
+<div class = "content">
+    <form action = '/trades' method = 'POST'>
+        <table>
+            
+            <tr>
+                <td><label for="publicationCompany">Publication Comapny</label></td>
+                <td><input type="text" id="publicationCompany" name="publicationCompany" class = "fixed-width" required></td>
+            </tr>
+            <tr>
+                <td><label for="author">Author</label></td>
+                <td><input type="text" id="author" name="author" class = "fixed-width" required></td>
+            </tr>
+            <tr>
+                <td><label for="issueId">Issue Number</label></td>
+                <td><input type="text" id="issueId" name="issueId" class = "fixed-width" required></td>
+            </tr>
+            <tr>
+                <td><label for="comicName">Title</label></td>
+                <td><input type="text" id="comicName" name="comicName" class = "fixed-width" required minlength="5"></td>
+            </tr>
+            <tr>
+                <td><label for="comicImageURL">Image URL</label></td>
+                <td><input type="text" id="comicImageURL" name="comicImageURL" class = "fixed-width" required></td>
+            </tr>
+            <tr>
+                <td class = "align-top"><label for="storyPlot">Story Description</label></td>
+                <td><textarea rows="5" id="storyPlot" name="storyPlot" class = "fixed-width" required minlength="10"></textarea></td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" class = "align-right"><button>Submit</button></td>
+            </tr>
+        </table>        
+    </form>
+
+    </div>
+<%- include('../partials/footer.ejs')%>

@@ -1,0 +1,18 @@
+<%- include('../partials/header.ejs')%>
+        <div class = "content">
+            <%if (comics){%>
+                <%categs.forEach(category => {%>
+                    <h3><%=category%></h3>
+                    <%comics.forEach(comic => {%>
+                        <%if (comic.publicationCompany === category){%>
+                            <a href = "/trades/<%= comic._id%>"><p><%= comic.comicName%></p></a>
+                        <%}%>
+                    <%});%>
+                <%});%>
+            <%} else {%>
+                <p>There are no comics to display</p>
+            <%}%>
+          
+            
+        </div>
+<%- include('../partials/footer.ejs')%>

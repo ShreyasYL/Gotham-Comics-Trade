@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs')%>
+    <div class = "content">
+        <div>
+            <p>
+                <img src = "<%= encodeURI(comic.comicImageURL)%>" alt = "<%= comic.comicName%>" width = "150" height = "200"/>
+            </p>       
+            <h4><%= comic.comicName%></h4>
+            
+               <small>Author: <%= comic.author%> , Trade posted at <%= comic.createdAt%> by <%= comic.postedBy.firstName + " " +comic.postedBy.lastName%></small>
+        </div>
+        <div id = "comic">
+            <p>
+                <%= comic.storyPlot%>
+            </p>
+        </div>
+
+    <form>
+        <%if(user == comic.postedBy._id && comic.offerStatus == 'Available'){%>
+            <button type = "submit" formmethod="GET" formaction = "/trades/<%= comic._id%>/editTrade">Edit</button>
+            
+        <%}%>
+        <%if(user == comic.postedBy._id && comic.offerStatus != 'Traded'){%>
+            <button type = "submit" formmethod="POST" formaction = "/trades/<%= comic._id%>/?_method=DELETE">Delete</button>
+        <%}%>
+        <%if(!comic.onWatchList.includes(user) && user != comic.postedBy._id && (comic.offerStatus == 'Available' || comic.offerStatus == 'Offer Pending')){%>
+            <button type = "submit" formmethod="POST" formaction = "/trades/<%= comic._id%>/watch/?_method=PUT">Watch</button>
+        <%}else if(comic.onWatchList.includes(user) && user != comic.postedBy._id && comic.offerStatus != 'Traded'){%>
+            <button type = "submit" formmethod="POST" formaction = "/trades/<%= comic._id%>/unwatch/?_method=PUT">Unwatch</button>
+        <%}%>
+        <%if(user != comic.postedBy._id && comic.offerStatus == 'Available'){%>
+            <button type = "submit" formmethod="GET" formaction = "/users/<%= comic._id%>/trade">Trade It</button>
+        <%}%>
+    </form>
+
+    
+
+    </div>
+<%- include('../partials/footer.ejs')%>

@@ -1,0 +1,28 @@
+<%- include('../partials/header.ejs')%>
+    <p>Choose a trade item to sell</p>
+    <%if(upForSale.length > 0) {%>
+        <form method =  "POST" action = '/users/<%=id%>?_method=PUT'>
+        <table class = "new">
+            <tr>
+                <th>Choice</th>
+                <th>Publication Company</th>
+                <th>Comic Name</th>
+                <th>Status</th>
+            </tr>
+            <%upForSale.forEach(item => {%>
+                <%if(item.offerStatus == 'Available'){%>
+                    <tr>
+                        <td><input type="radio" name="tradeItem" value="<%=item._id%>"></td>
+                        <td><p><%=item.publicationCompany%></p></td>
+                        <td><p><%=item.comicName%></p></td>
+                        <td><p><%=item.offerStatus%></p></td>
+                    </tr>
+            <%}%>
+        <%});%>
+        </table>
+        <button type = "submit">Trade</button>
+        </form>
+    <%}%>
+    
+
+<%- include('../partials/footer.ejs')%>
